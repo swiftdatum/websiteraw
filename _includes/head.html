@@ -41,6 +41,20 @@
     <script type="text/javascript" async
         src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        // enable automatic line breaks (might look ugly)
+        CommonHTML: { linebreaks: { automatic: true } },
+        "HTML-CSS": { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } },
+
+        // enable $ for inline math -> use \$ for ordinary dollar-sign
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          processEscapes: true
+        },
+      });
+    </script>
     {% endif %}
 
     <!-- Verifications -->

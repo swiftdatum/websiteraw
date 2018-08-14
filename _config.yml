@@ -1,10 +1,10 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
-baseurl:     ""
-url:         "http://pixyll.com"
+title:       swiftdatum
+email:       swiftdatumscience@gmail.com
+author:      Ivan Lazarevich and Ilya Prokin
+description: "A blog about Data Science, Machine Learning, Artificial Intelligence."
+url: swiftdatum.github.io
+baseurl: /
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md
@@ -25,7 +25,7 @@ show_related_posts:   false
 show_post_footers:    false
 show_social_icons:    false
 ajaxify_contact_form: false
-enable_mathjax: false
+enable_mathjax: true
 extended_fonts: false
 enable_anchorjs: false
 # Preview image for social media aka og:image and twitter:image

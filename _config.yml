@@ -2,9 +2,9 @@
 title:       swiftdatum
 email:       swiftdatumscience@gmail.com
 author:      Ivan Lazarevich and Ilya Prokin
-description: "A blog about Data Science, Machine Learning, Artificial Intelligence."
+description: "A blog about Data Science, Machine Learning, and Artificial Intelligence."
 url: swiftdatum.github.io
-baseurl: /
+baseurl: ""
 date_format: "%b %-d, %Y"
 header_pages:
  - about.md

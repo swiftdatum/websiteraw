@@ -16,9 +16,11 @@ for F in $(ls ./*.ipynb); do
     mv $FNAME.md ../_posts/
     [ -d "../images/${FNAME}_files" ] && rm -rf "../images/${FNAME}_files"
     mv "${FNAME}_files" ../images/
+    cd "../images/${FNAME}_files/"
+    optipng -o7 -strip all *.png
     #mv $FNAME.md "${FNAME}_files"/
     #mv "${FNAME}_files" $FNAME
     #[ -d "../_posts/$FNAME" ] && rm -rf "../_posts/$FNAME"
     #mv $FNAME ../_posts
 done
-cd -
+cd ..

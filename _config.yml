@@ -112,6 +112,8 @@ text:
       sent:     'Message sent!'
       error:    'Error!'
   thanks: 'Thanks for contacting us. We will reply as soon as possible.'
+  main_header: 'This is a joint blog of two guys passionate 
+                about data science: Ivan and Ilya'
   og_locale: 'en_US'
 
 # Build settings

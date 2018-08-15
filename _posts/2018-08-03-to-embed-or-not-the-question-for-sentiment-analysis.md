@@ -3,7 +3,6 @@ layout: post
 title: "To embed or not to embed: the question for sentiment analysis"
 authors: Ilya & Vanya
 ---
-# Intro
 
 Word embeddings are very popular for NLP tasks. Some data scientists use pretrained "out-of-the-box" word embeddings to classify sentiment. However, it was [pointed out](https://github.com/attardi/deepnl/wiki/Sentiment-Specific-Word-Embeddings) that generic word embeddings produce vector space representations that do not necessary well encode sentiment information by proximity relationships. To cite the *deepnl* Python package documentation:
 

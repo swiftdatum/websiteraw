@@ -9,5 +9,5 @@ push:
 notebooks:
 	bash notebookstoposts.sh
 
-all: build notebooks push
+all: notebooks build push
 	echo "All done!"

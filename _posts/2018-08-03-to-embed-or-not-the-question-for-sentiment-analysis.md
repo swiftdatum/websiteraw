@@ -3,7 +3,6 @@ layout: post
 title: "To embed or not to embed: the question for sentiment analysis"
 authors: Ilya & Vanya
 ---
-
 # Intro
 
 Word embeddings are very popular for NLP tasks. Some data scientists use pretrained "out-of-the-box" word embeddings to classify sentiment. However, it was [pointed out](https://github.com/attardi/deepnl/wiki/Sentiment-Specific-Word-Embeddings) that generic word embeddings produce vector space representations that do not necessary well encode sentiment information by proximity relationships. To cite the *deepnl* Python package documentation:
@@ -32,8 +31,8 @@ In text classification, a standard data preprocessing step is to represent text 
 
 ### Zoo of embeddings: words as vectors
 
-Instead of representing whole documents as vectors one can represent single words. A simplest way to do it is one-hot encoding vector for vocabulary of size $n$: a word $j \in \{1...n\}$ is represented by $(b_1\ b_2\ ...\ b_n)^\text{T}$ where all $b_i = \delta_{ij}$.
-After one has a vector space representation, one can learn mapping from the vector space with one dimension per word to a lower dimensional continuous vector space. To learn this embedding one can construct objective functions so that the learned mapping reflects syntactic relationshits between words. For this purpuse, neural network based embeddings become increasingly popular: [word2vec](https://en.wikipedia.org/wiki/Word2vec) by Google, [MUSE](https://research.fb.com/downloads/muse-multilingual-unsupervised-and-supervised-embeddings/) by facebook, [GloVe](https://en.wikipedia.org/wiki/GloVe_(machine_learning) at Stanford, FastText. The advantage of these more modern approaches is that they can learn syntactic relationships that allow for meaningful word-vector distances.
+Instead of representing whole documents as vectors one can represent single words. A simplest way to do it is one-hot encoding vector for vocabulary of size $n$: a word $j \in \\{1...n\\}$ is represented by $(b_1\ b_2\ ...\ b_n)^\text{T}$ where all $b_i = \delta_{ij}$.
+After one has a vector space representation, one can learn mapping from the vector space with one dimension per word to a lower dimensional continuous vector space. To learn this embedding one can construct objective functions so that the learned mapping reflects syntactic relationshits between words. For this purpuse, neural network based embeddings become increasingly popular: [word2vec](https://en.wikipedia.org/wiki/Word2vec) by Google, [MUSE](https://research.fb.com/downloads/muse-multilingual-unsupervised-and-supervised-embeddings/) by facebook, [GloVe](https://en.wikipedia.org/wiki/GloVe) at Stanford, FastText. The advantage of these more modern approaches is that they can learn syntactic relationships that allow for meaningful word-vector distances.
 
 # What's up with embeddings?
 
@@ -92,9 +91,14 @@ pylab.rcParams['figure.figsize'] = 13, 8
 
 Pre-trained MUSE and GloVe in plain-text format are accessible for direct download from the web via *wget* or *curl*.
 
-A binary file of the word2vec model trained on the Google news corpus is hosted on Google Drive: https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit
+A binary file of the word2vec model trained on the Google news corpus is hosted on Google Drive: <https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit>
 
 Below is a simple Python routine to download the file from Google Drive (working as of August 2018):
+
+<details> 
+  <summary>
+      Google downloader
+  </summary>
 
 
 ```python
@@ -129,8 +133,9 @@ def download_file_from_google_drive(id, destination):
         response = session.get(URL, params = params, stream = True)
 
     save_response_content(response, destination)    
-
 ```
+
+</details>
 
 
 ```python
@@ -275,7 +280,7 @@ def embed_from_list(embedding, word_list):
 
 We now embed all words corresponding to positive and negaive classes with all embedding models.
 
-If we plot the pairwise distance distributions for the two classes of words, we will see that althouth distributions largely overlap, separation between the negative and positive word-vector clouds exists and differs across embeddings: better separation can be seen for Word2Vec and MUSE than for GloVe (a fact also confirmed by Kolvogorov-Smirnov statistics).
+If we plot the pairwise distance distributions for the two classes of words, we will see that althouth distributions largely overlap, separation between the negative and positive word-vector clouds exists and differs across embeddings: better separation can be seen for Word2Vec and MUSE than for GloVe (a fact also confirmed by [Kolmogorov-Smirnov](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) statistics).
 
 
 ```python
@@ -339,15 +344,15 @@ for name, embedding in embeddings.items():
 
 
 
-![png](2018-08-03_vanya_final_post_part1_21_1.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_21_1.png)
 
 
 
-![png](2018-08-03_vanya_final_post_part1_21_2.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_21_2.png)
 
 
 
-![png](2018-08-03_vanya_final_post_part1_21_3.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_21_3.png)
 
 
 Let's define a utility function that converts words of different sentiment to a design matrix and a label vector in a standard *sklearn* format:
@@ -417,7 +422,7 @@ plot_lowdim_embed(PCA(n_components=2), embeddings, words);
 
 
 
-![png](2018-08-03_vanya_final_post_part1_27_1.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_27_1.png)
 
 
 We can also apply a nonlinear mapping such as 2D t-SNE to get a nicer visual separation of sentiment classes:
@@ -439,7 +444,7 @@ _ = plot_lowdim_embed(TSNE(n_jobs=8,
 
 
 
-![png](2018-08-03_vanya_final_post_part1_29_1.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_29_1.png)
 
 
 Let's visualize the first 6 principal components of the data with [RadViz](https://pandas.pydata.org/pandas-docs/stable/visualization.html#visualization-radviz):
@@ -465,7 +470,7 @@ for ax, (name, embedding) in zip(axs, embeddings.items()):
 ```
 
 
-![png](2018-08-03_vanya_final_post_part1_31_0.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_31_0.png)
 
 
 From the above plots we see that there's clearly some separation between word-vector high density parts of clouds corresponding to different sentiment polarity. However for a given region in word-vector space where a certain sentiment is dominant, there still exist points belonging to an opposite sentiment class.
@@ -546,7 +551,7 @@ fig.tight_layout()
 
 
 
-![png](2018-08-03_vanya_final_post_part1_37_1.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_37_1.png)
 
 
 We can now cosider reduced embedding spaces which are only comprised of embedding dimensions relevant for sentiment classification:
@@ -583,7 +588,7 @@ plot_lowdim_embed(PCA(n_components=2),
 ```
 
 
-![png](2018-08-03_vanya_final_post_part1_41_0.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_41_0.png)
 
 
 
@@ -594,7 +599,7 @@ _ = plot_lowdim_embed(TSNE(n_jobs=8,
 ```
 
 
-![png](2018-08-03_vanya_final_post_part1_42_0.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_42_0.png)
 
 
 Compared to the PCA plots for full embedding spaces, there is visually a significant increase in separability, but there is still a considerable overlap between sentiment classes.
@@ -673,19 +678,19 @@ _ = plot_lowdim_embed(NeuralWordMapping(n_components=2,
 
 
 
-![png](2018-08-03_vanya_final_post_part1_48_1.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_48_1.png)
 
 
 
-![png](2018-08-03_vanya_final_post_part1_48_2.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_48_2.png)
 
 
 
-![png](2018-08-03_vanya_final_post_part1_48_3.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_48_3.png)
 
 
 
-![png](2018-08-03_vanya_final_post_part1_48_4.png)
+![png](/images/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_files/2018-08-03-to-embed-or-not-the-question-for-sentiment-analysis_48_4.png)
 
 
 Now the sentiment classes look quite nicely separated compared to the PCA plots, and we were able to achieve more than 80% accuracy in sentiment classification on this dataset for MUSE and word2vec embeddings. Results were slightly worse for GloVe embeddings.

@@ -116,16 +116,17 @@ text:
 
 # Build settings
 markdown:     kramdown
+kramdown:
+  parse_block_html: true
 permalink:    pretty
 paginate:     4
 sass:
   style: compressed
-plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
 # https://github.com/jekyll/jekyll/issues/2938
+
 exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
   - Makefile
+  - notebooks

@@ -112,8 +112,10 @@ text:
       sent:     'Message sent!'
       error:    'Error!'
   thanks: 'Thanks for contacting us. We will reply as soon as possible.'
-  main_header: 'This is a joint blog of two guys passionate 
-                about data science: Ivan and Ilya'
+  main_header: '<b>swiftdatum</b> is a joint blog of two guys 
+                passionate about data science: <a href="https://vanyalzr.github.io/">Ivan</a> 
+                and <a href="https://iprokin.github.io/">Ilya</a>. 
+                Below you can find our latest posts:'
   og_locale: 'en_US'
 
 # Build settings

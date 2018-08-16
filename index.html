@@ -4,7 +4,7 @@ layout: default
 {% assign posts_count = paginator.posts | size %}
 
 <div class="home">
-  <h2>{{ site.text.main_header }}</h2>
+  <p style="font-size:20pt;margin-top:30px">{{ site.text.main_header }}</p>
   {% if posts_count > 0 %}
     <div class="posts">
       {% for post in paginator.posts %}
